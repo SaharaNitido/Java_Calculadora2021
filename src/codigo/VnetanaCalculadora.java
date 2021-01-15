@@ -32,6 +32,18 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         display.setText(display.getText() + numero);
         }
     }
+    //La función que se encarga de trabajar con la operación pulsada
+    public void operacionPulsada( String _operacion){
+        //Guardo el valor de la pantalla en la variable operando1
+        operando1 = Double.valueOf(display.getText());
+        
+        //Pongo a cero la pantalla
+        display.setText("0");
+        
+        //Guardo la operación que he pulsado
+        operacion = _operacion;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,6 +163,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
 
         botonmas.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botonmas.setText("+");
+        botonmas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonmasActionPerformed(evt);
+            }
+        });
 
         boton9.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         boton9.setText("9");
@@ -295,6 +312,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
     private void boton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton9ActionPerformed
         escribeNumeroEnPantalla("9");
     }//GEN-LAST:event_boton9ActionPerformed
+
+    private void botonmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonmasActionPerformed
+        operacionPulsada("+");
+        
+    }//GEN-LAST:event_botonmasActionPerformed
 
     /**
      * @param args the command line arguments
