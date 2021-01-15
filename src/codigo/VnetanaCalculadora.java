@@ -94,6 +94,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
 
         botonigual.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botonigual.setText("=");
+        botonigual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonigualActionPerformed(evt);
+            }
+        });
 
         botonmenos.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botonmenos.setText("-");
@@ -317,6 +322,24 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         operacionPulsada("+");
         
     }//GEN-LAST:event_botonmasActionPerformed
+
+    private void botonigualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonigualActionPerformed
+        //El botón igual tiene que saber qué operación se pulsó
+        //como ese valor lo guardé en la variable operación,
+        //la operación correspondiente
+        
+        //primero guardo lo que haya en la pantalla en una variable double
+        double operando2 = Double.valueOf(display.getText());
+        
+        //si la operación era la suma:
+        if (operacion.equals("+")){
+            operando1 = operando1 + operando2; 
+        }
+        
+        //por último, muestro el resultado por pantalla
+        display.setText(String.valueOf(operando1));
+        
+    }//GEN-LAST:event_botonigualActionPerformed
 
     /**
      * @param args the command line arguments
