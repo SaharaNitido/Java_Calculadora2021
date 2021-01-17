@@ -34,7 +34,7 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
     }
     //La función que se encarga de trabajar con la operación pulsada
     public void operacionPulsada( String _operacion){
-        //Guardo el valor de la pantalla en la variable operando1
+        //Guardo el valor de la pantalla en la variable operando
         operando1 = Double.valueOf(display.getText());
         
         //Pongo a cero la pantalla
@@ -102,6 +102,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
 
         botonmenos.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botonmenos.setText("-");
+        botonmenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonmenosActionPerformed(evt);
+            }
+        });
 
         boton3.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         boton3.setText("3");
@@ -154,9 +159,19 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
 
         botondividir.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botondividir.setText("/");
+        botondividir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botondividirActionPerformed(evt);
+            }
+        });
 
         botonmultiplicar.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         botonmultiplicar.setText("*");
+        botonmultiplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonmultiplicarActionPerformed(evt);
+            }
+        });
 
         boton7.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         boton7.setText("7");
@@ -335,11 +350,34 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         if (operacion.equals("+")){
             operando1 = operando1 + operando2; 
         }
-        
+        //si la operacion es resta
+        if (operacion.equals("-")){
+            operando1 = operando1 - operando2; 
+        }
+        //si la operacion es multiplicación
+        if (operacion.equals("*")){
+            operando1 = operando1 * operando2; 
+        }
+        //si la operacion es dividir
+        if (operacion.equals("/")){
+            operando1 = operando1 / operando2; 
+        }
         //por último, muestro el resultado por pantalla
         display.setText(String.valueOf(operando1));
         
     }//GEN-LAST:event_botonigualActionPerformed
+
+    private void botonmenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonmenosActionPerformed
+        operacionPulsada("-");
+    }//GEN-LAST:event_botonmenosActionPerformed
+
+    private void botonmultiplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonmultiplicarActionPerformed
+        operacionPulsada("*");
+    }//GEN-LAST:event_botonmultiplicarActionPerformed
+
+    private void botondividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botondividirActionPerformed
+        operacionPulsada("/");
+    }//GEN-LAST:event_botondividirActionPerformed
 
     /**
      * @param args the command line arguments
