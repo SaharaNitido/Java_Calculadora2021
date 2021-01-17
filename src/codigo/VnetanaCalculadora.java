@@ -44,6 +44,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         operacion = _operacion;
     }
     
+    //crear boton que sirva para poner a cero
+    public void reset (String _reset){
+        display.setText ("0");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +75,11 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         botonmas = new javax.swing.JButton();
         boton9 = new javax.swing.JButton();
         boton8 = new javax.swing.JButton();
+        botonReset = new javax.swing.JButton();
+        botonraiz = new javax.swing.JButton();
+        botone = new javax.swing.JButton();
+        botonlog = new javax.swing.JButton();
+        botonelevado = new javax.swing.JButton();
 
         jButton12.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         jButton12.setText("1");
@@ -78,7 +88,7 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
 
         display.setBackground(new java.awt.Color(0, 0, 0));
         display.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
-        display.setForeground(new java.awt.Color(51, 255, 102));
+        display.setForeground(new java.awt.Color(51, 255, 51));
         display.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         display.setText("0");
         display.setOpaque(true);
@@ -206,6 +216,42 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
             }
         });
 
+        botonReset.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        botonReset.setText("C");
+        botonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonResetActionPerformed(evt);
+            }
+        });
+
+        botonraiz.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 36)); // NOI18N
+        botonraiz.setText("√ ");
+        botonraiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonraizActionPerformed(evt);
+            }
+        });
+
+        botone.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+
+        botonlog.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        botonlog.setText("log");
+        botonlog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonlogActionPerformed(evt);
+            }
+        });
+
+        botonelevado.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        botonelevado.setText("x^2");
+        botonelevado.setToolTipText("");
+        botonelevado.setActionCommand("xª");
+        botonelevado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonelevadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,7 +264,13 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(botonigual, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -230,10 +282,9 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(botonmultiplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(botonigual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(34, 34, 34)
+                                .addComponent(botonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(botondividir, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
@@ -251,18 +302,34 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(botonmas, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(botone, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(28, 28, 28)
-                                        .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(246, 246, 246)))))
-                        .addContainerGap(26, Short.MAX_VALUE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(botonelevado, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(botonlog, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(botonraiz, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(246, 246, 246)))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonraiz, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonlog, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonelevado, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boton9, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,7 +351,8 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonigual, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botondividir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botondividir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonReset, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -350,18 +418,38 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         if (operacion.equals("+")){
             operando1 = operando1 + operando2; 
         }
+        
         //si la operacion es resta
         if (operacion.equals("-")){
             operando1 = operando1 - operando2; 
         }
+        
         //si la operacion es multiplicación
         if (operacion.equals("*")){
             operando1 = operando1 * operando2; 
         }
+        
         //si la operacion es dividir
         if (operacion.equals("/")){
             operando1 = operando1 / operando2; 
         }
+        
+        //si la operacion es una raiz cuadrada
+        if (operacion.equals("√")){
+            operando1 = Math.sqrt(operando1); 
+        }
+        
+        //calcular un logaritmo en base 10
+        if (operacion.equals("log")){
+            operando1 = Math.log10(operando1); 
+        }
+        
+        //si la operacion es unelevado a 2
+        if (operacion.equals("elevado")){
+            operando1 = operando1 * operando1; 
+        }
+        
+        
         //por último, muestro el resultado por pantalla
         display.setText(String.valueOf(operando1));
         
@@ -379,6 +467,23 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
         operacionPulsada("/");
     }//GEN-LAST:event_botondividirActionPerformed
 
+    private void botonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetActionPerformed
+        reset("_reset");
+    }//GEN-LAST:event_botonResetActionPerformed
+
+    private void botonraizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonraizActionPerformed
+        operacionPulsada("√");
+    }//GEN-LAST:event_botonraizActionPerformed
+
+    private void botonlogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonlogActionPerformed
+        operacionPulsada("log");
+    }//GEN-LAST:event_botonlogActionPerformed
+
+    private void botonelevadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonelevadoActionPerformed
+        operacionPulsada("elevado");
+    }//GEN-LAST:event_botonelevadoActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -425,11 +530,16 @@ public class VnetanaCalculadora extends javax.swing.JFrame {
     private javax.swing.JButton boton7;
     private javax.swing.JButton boton8;
     private javax.swing.JButton boton9;
+    private javax.swing.JButton botonReset;
     private javax.swing.JButton botondividir;
+    private javax.swing.JButton botone;
+    private javax.swing.JButton botonelevado;
     private javax.swing.JButton botonigual;
+    private javax.swing.JButton botonlog;
     private javax.swing.JButton botonmas;
     private javax.swing.JButton botonmenos;
     private javax.swing.JButton botonmultiplicar;
+    private javax.swing.JButton botonraiz;
     private javax.swing.JLabel display;
     private javax.swing.JButton jButton12;
     // End of variables declaration//GEN-END:variables
